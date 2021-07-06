@@ -6,15 +6,17 @@ import cors from "cors";
 import userRouter from "./routes/user.js";
 
 const app = express();
+const router = express.Router()
 
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
 app.use('/user', userRouter);
+app.use('/', userRouter)
 
 
-const CONNECTION_URL = "mongodb://localhost/users";
+const CONNECTION_URL = "mongodb://localhost/tatt_appt";
 const PORT = process.env.PORT || 9000;
 
 mongoose.connect(CONNECTION_URL, {

@@ -1,22 +1,21 @@
 import React, { useState } from "react";
-import { GoogleLogin } from "react-google-login";
-//import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-//import { signin, signup } from '../../actions/auth'
-
 import {
   Avatar,
   Grid,
   Paper,
   Button,
-  Input,
   Typography,
   Container,
-  TextField,
 } from "@material-ui/core";
+import { GoogleLogin } from "react-google-login";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { signin, signup } from "../../actions/auth";
+
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import useStyles from "./styles";
 import Icon from "./icon";
+import Input from "./Input";
+import useStyles from "./styles";
 
 const initialState = {
   firstName: "",
@@ -30,24 +29,24 @@ const Auth = () => {
   const classes = useStyles();
   const [isSignUp, setIsSignUp] = useState(false);
   const [showPassword, setShowpassword] = useState(false);
-  //const [formData, setFormData] = useState(initialState);
-  //const dispatch = useDispatch();
-  //const history = useHistory();
+  const [formData, setFormData] = useState(initialState);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleShowPassword = () => setShowpassword(!showPassword);
 
   const handleSubmit = (e) => {
-    // e.preventDefault();
-    // if (isSignUp) {
-    //   dispatch(signup(formData, history));
-    // } else {
-    //   dispatch(signin(formData, history));
-    // }
-    // console.log(formData);
+    e.preventDefault();
+    if (isSignUp) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history));
+    }
+    console.log(formData);
   };
 
   const handleChange = (e) => {
-    //setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const switchMode = () => {
@@ -61,14 +60,15 @@ const Auth = () => {
   };
   const googleSuccess = async (res) => {
     // ?. = optional chaining operator
-    // const result = res?.profileObj;
-    // const token = res?.tokenId;
-    // try {
-    //   dispatch({ type: "AUTH", data: { result, token } });
-    //   history.push("/");
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+
+    try {
+      dispatch({ type: "AUTH", data: { result, token } });
+      history.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
