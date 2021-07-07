@@ -17,6 +17,8 @@ export default makeStyles((theme) => ({
     },
     image: {
       marginLeft: '15px',
+      height: '200px',
+      width: '50%',
     },
     toolbar: {
       display: 'flex',
