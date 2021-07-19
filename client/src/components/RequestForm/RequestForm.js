@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import FileBase from "react-file-base64";
 import { createRequest } from "../../actions/reqform";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import {
   TextField,
   Grid,
@@ -12,24 +12,29 @@ import {
 } from "@material-ui/core";
 
 let reqFormData = {
-  location: "",
+  location: "forearm",
   width: 0,
   height: 0,
   colors: 0,
-  comments: "",
-  selectedFile: "",
+  comments: "hello world",
+  selectedFile: [],
 };
 
 const RequestForm = (props) => {
   const [reqData, setReqData] = useState(reqFormData);
   const dispatch = useDispatch();
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(createRequest(reqData));
-    //console.log(reqData);
+    //dispatch(createRequest(reqData));
+    console.log(reqData);
   };
+  const setImgFiles = (img) => {
+    console.log(img.base64);
+    // setReqData({ ...reqData, selectedFile: [...reqData.selectedFile, img.base64] })
+    // console.log(reqData);
+  };
+
   return (
     <Container component="main" maxwidth="md">
       <Paper>
@@ -108,17 +113,21 @@ const RequestForm = (props) => {
             <Grid item sm="12">
               <FileBase
                 type="file"
-                multiple={false}
-                onDone={(base64) =>
-                  setReqData({
-                    ...reqData,
-                    selectedFile: base64,
-                  })
-                }
+                multiple={true}
+
               />
+              <button>Add Image</button>
             </Grid>
           </Grid>
-          <Button variant="contained" color="primary" size="large" type="submit" fullWidth>Submit</Button>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            type="submit"
+            fullWidth
+          >
+            Submit
+          </Button>
           <Button>Clear</Button>
         </form>
       </Paper>
@@ -127,6 +136,5 @@ const RequestForm = (props) => {
 };
 
 export default RequestForm;
-
-
+// for ln 117 => onDone={({ base64 }) => setImgFiles(base64)}
 // selectedFile: [...reqData.selectedFile, base64]  => for line 115
