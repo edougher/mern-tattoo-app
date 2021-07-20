@@ -10,23 +10,25 @@ import {
   Typography,
   Container,
 } from "@material-ui/core";
-
+const user = JSON.parse(localStorage.getItem('profile'))
 let reqFormData = {
+  userId: "",
   location: "forearm",
   width: 0,
   height: 0,
   colors: 0,
   comments: "hello world",
-  selectedFile: [],
+  selectedFile: "",
 };
 
 const RequestForm = (props) => {
   const [reqData, setReqData] = useState(reqFormData);
+  const user = JSON.parse(localStorage.getItem('profile'))
   const dispatch = useDispatch();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //dispatch(createRequest(reqData));
+    //setReqData({...reqData, userId: user.result._id})
+    dispatch(createRequest({ ...reqData, userId: user?.result?._id}));
     console.log(reqData);
   };
   const setImgFiles = (img) => {

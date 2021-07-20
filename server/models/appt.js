@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const apptSchema = mongoose.Schema({
-  creator: String,
+  userId: String,
   location: String,
   height: Number,
   width: Number,

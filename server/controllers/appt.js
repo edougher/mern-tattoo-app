@@ -15,3 +15,14 @@ export const newAppt = async (req, res) => {
     }
 }
 
+export const userAppts = async (req, res) => {
+    const { id } = req.params
+    const appts = Appt.find({ userId: id }, (error, data) => {
+        if (error) {
+            console.log(error);
+        } else {
+            res.status(201).json(data)
+        }
+    })
+}
+

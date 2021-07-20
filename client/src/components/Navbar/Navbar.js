@@ -17,7 +17,7 @@ import * as actionType from "../../constants/actionTypes";
 import darkRose from "../../images/dark_rose.png";
 
 const Navbar = (props) => {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
@@ -39,6 +39,18 @@ const Navbar = (props) => {
 
     setUser(null);
   };
+
+  useEffect(() => {
+    const token = user?.token;
+
+    if (token) {
+      const decodedToken = decode(token);
+
+      if (decodedToken.exp * 1000 < new Date().getTime()) logout();
+    }
+
+    setUser(JSON.parse(localStorage.getItem('profile')));
+  },[]);
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
@@ -89,7 +101,7 @@ const Navbar = (props) => {
                   variant="contained"
                   color="secondary"
                   component={Link}
-                  to="/reqform"
+                  to="/profile"
                 >
                   Profile
                 </Button>
