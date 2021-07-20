@@ -10,10 +10,7 @@ const Home = () => {
   const classes = useStyles();
   const dispatch = useDispatch()
   const user = JSON.parse(localStorage.getItem('profile'))
-  dispatch(getUserAppts(user?.result?._id))
-  // useEffect(() => {
-  //   dispatch(getUserAppts(user?.result?._id))
-  // }, [dispatch])
+   
   return (
     <Grow in>
       <Container>

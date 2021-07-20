@@ -50,7 +50,8 @@ const Navbar = (props) => {
     }
 
     setUser(JSON.parse(localStorage.getItem('profile')));
-  },[]);
+    console.log(user);
+  }, [location]);
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
       <div className={classes.brandContainer}>
@@ -73,7 +74,7 @@ const Navbar = (props) => {
               alt={user?.result.firstname}
               src={user?.result.imageUrl}
             >
-              {user?.result.firstname.charAt(0)}
+              {user?.result?.familyName}
             </Avatar>
             <Typography className={classes.userName} variant="h6">
               {user?.result.firstname}

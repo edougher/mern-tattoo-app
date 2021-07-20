@@ -8,6 +8,7 @@ const apptSchema = mongoose.Schema({
   colors: Number,
   comments: String,
   selectedFile: String,
+  status: {type: String, default: "Pending"},
   createdAt: {
     type: Date,
     defualt: new Date(),

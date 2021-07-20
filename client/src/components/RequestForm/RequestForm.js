@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import FileBase from "react-file-base64";
 import { createRequest } from "../../actions/reqform";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
   TextField,
   Grid,
@@ -23,12 +24,13 @@ let reqFormData = {
 
 const RequestForm = (props) => {
   const [reqData, setReqData] = useState(reqFormData);
+  const history = useHistory()
   const user = JSON.parse(localStorage.getItem('profile'))
   const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
     //setReqData({...reqData, userId: user.result._id})
-    dispatch(createRequest({ ...reqData, userId: user?.result?._id}));
+    dispatch(createRequest({ ...reqData, userId: user?.result?._id}, history));
     console.log(reqData);
   };
   const setImgFiles = (img) => {
