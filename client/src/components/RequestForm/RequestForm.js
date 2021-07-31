@@ -11,7 +11,7 @@ import {
   Typography,
   Container,
 } from "@material-ui/core";
-const user = JSON.parse(localStorage.getItem('profile'))
+
 let reqFormData = {
   userId: "",
   location: "forearm",
@@ -19,26 +19,24 @@ let reqFormData = {
   height: 0,
   colors: 0,
   comments: "hello world",
-  selectedFile: "",
+  imageFiles: [],
 };
 
 const RequestForm = (props) => {
   const [reqData, setReqData] = useState(reqFormData);
-  const history = useHistory()
-  const user = JSON.parse(localStorage.getItem('profile'))
+  const [images, setImages] = useState([]);
+  const history = useHistory();
+  const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
   const handleSubmit = async (e) => {
     e.preventDefault();
     //setReqData({...reqData, userId: user.result._id})
-    dispatch(createRequest({ ...reqData, userId: user?.result?._id}, history));
+    //dispatch(createRequest({ ...reqData, userId: user?.result?._id}, history));
     console.log(reqData);
   };
-  const setImgFiles = (img) => {
-    console.log(img.base64);
-    // setReqData({ ...reqData, selectedFile: [...reqData.selectedFile, img.base64] })
-    // console.log(reqData);
-  };
-
+  const handleOpen = () => {
+    
+  }
   return (
     <Container component="main" maxwidth="md">
       <Paper>
@@ -117,11 +115,18 @@ const RequestForm = (props) => {
             <Grid item sm="12">
               <FileBase
                 type="file"
-                multiple={true}
-
+                multiple={false}
+                onDone={({base64}) => setReqData({ ...reqData, imageFiles: [...reqData.imageFiles, base64] })}
               />
-              <button>Add Image</button>
+              <button type="button" onClick={handleOpen}>
+        react-transition-group
+      </button>
+
+              {/* {reqData.imageFiles.map((img) => {
+        return <h8>{img}</h8>
+      })} */}
             </Grid>
+            
           </Grid>
           <Button
             variant="contained"

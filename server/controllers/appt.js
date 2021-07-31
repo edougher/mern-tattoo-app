@@ -17,6 +17,7 @@ export const newAppt = async (req, res) => {
 
 export const userAppts = async (req, res) => {
     const { id } = req.params
+    console.log(id)
     const appts = Appt.find({ userId: id }, (error, data) => {
         if (error) {
             console.log(error);
