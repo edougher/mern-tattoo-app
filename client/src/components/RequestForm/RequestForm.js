@@ -3,6 +3,8 @@ import FileBase from "react-file-base64";
 import { createRequest } from "../../actions/reqform";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+
+import ImageModal from "./ImgModal/ImgModal";
 import {
   TextField,
   Grid,
@@ -24,10 +26,12 @@ let reqFormData = {
 
 const RequestForm = (props) => {
   const [reqData, setReqData] = useState(reqFormData);
+  const [open, setOpen] = useState(false);
   const [images, setImages] = useState([]);
   const history = useHistory();
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     //setReqData({...reqData, userId: user.result._id})
@@ -35,8 +39,11 @@ const RequestForm = (props) => {
     console.log(reqData);
   };
   const handleOpen = () => {
-    
-  }
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <Container component="main" maxwidth="md">
       <Paper>
@@ -116,17 +123,28 @@ const RequestForm = (props) => {
               <FileBase
                 type="file"
                 multiple={false}
-                onDone={({base64}) => setReqData({ ...reqData, imageFiles: [...reqData.imageFiles, base64] })}
+                onDone={({ base64 }) =>
+                  setReqData({
+                    ...reqData,
+                    imageFiles: [...reqData.imageFiles, base64],
+                  })
+                }
               />
-              <button type="button" onClick={handleOpen}>
-        react-transition-group
-      </button>
+              {!reqData.imageFiles.length ?
+                <button type="button" >
+                  No Images uploaded
+                </button> :
+                <button type="button" onClick={handleOpen}>
+                  {reqData.imageFiles.length === 1 ?
+                    "View Image" :
+                    `View ${reqData.imageFiles.length} Images`}
+                </button>
+              }
 
               {/* {reqData.imageFiles.map((img) => {
         return <h8>{img}</h8>
       })} */}
             </Grid>
-            
           </Grid>
           <Button
             variant="contained"
@@ -140,6 +158,11 @@ const RequestForm = (props) => {
           <Button>Clear</Button>
         </form>
       </Paper>
+      <ImageModal
+        open={open}
+        handleClose={handleClose}
+        imgs={reqData.imageFiles}
+      />
     </Container>
   );
 };

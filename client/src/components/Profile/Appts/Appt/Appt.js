@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import { useDispatch } from "react-redux";
 import { deleteAppt } from "../../../../actions/appts";
 
 import moment from "moment";
@@ -17,8 +16,8 @@ import useStyles from "./styles";
 
 const Appt = ({ appt, setCurrentId }) => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem("profile"));
+  //const dispatch = useDispatch();
+  
 
   return (
     <Card className={classes.card}>

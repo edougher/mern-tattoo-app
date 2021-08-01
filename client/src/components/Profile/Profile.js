@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Grow, Container, Grid, Typography } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { getUserAppts } from "../../actions/appts.js";
 
+import { Grow, Container, Grid, Typography } from "@material-ui/core";
 import useStyles from '../../styles'
 import Appts from "./Appts/Appts.js";
 
 const Profile = () => {
   const classes = useStyles();
-  // const user = JSON.parse(localStorage.getItem('profile'))
+  const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("profile"));
+
+  useEffect(() => {
+    // user?.result?.id ? 
+    //   dispatch(getUserAppts(user?.result?.id)) :
+    //   dispatch(getUserAppts(user?.result?.googleId)) 
+      console.log(user);
+  },[]);
 
   return (
     <Grow in>

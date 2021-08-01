@@ -3,20 +3,14 @@ import { Grid, CircularProgress } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import Appt from "./Appt/Appt";
 import useStyles from "./styles";
-import { getUserAppts } from "../../../actions/appts.js";
+
+
+
 const Appts = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem("profile"));
   const appts = useSelector((state) => state.appts);
 
-  useEffect(() => {
-    dispatch(getUserAppts(user?.result?.id || user?.result?.googleId));
-  }, []);
-
-  return !appts.length ? (
-    <CircularProgress />
-  ) : (
+  return (
     <Grid
       className={classes.container}
       container

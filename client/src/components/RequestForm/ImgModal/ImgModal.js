@@ -1,18 +1,13 @@
-import React from 'react';
-import { Modal, Backdrop, Fade } from '@material-ui/core';
-import { useStyles } from './styles';
+import React from "react";
+import { Modal, Backdrop, Fade } from "@material-ui/core";
+import { useStyles } from "./styles";
 
+const ImageModal = ({ open, handleClose, imgs }) => {
+  const classes = useStyles();
 
-const ImageModal = () => {
-    const classes = useStyles()
-
-    const handleClose = () => {
-        
-    }
-
-    return (
+  return (
     <div>
-<Modal
+      <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
         className={classes.modal}
@@ -26,13 +21,14 @@ const ImageModal = () => {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <h2 id="transition-modal-title">Transition modal</h2>
-            <p id="transition-modal-description">react-transition-group animates me.</p>
+            {imgs.map((img) => (
+              <img src={img} alt="Uploaded Reference File" />
+            ))}
           </div>
         </Fade>
       </Modal>
     </div>
   );
-}
+};
 
 export default ImageModal;
