@@ -34,9 +34,9 @@ const RequestForm = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    //setReqData({...reqData, userId: user.result._id})
-    //dispatch(createRequest({ ...reqData, userId: user?.result?._id}, history));
-    console.log(reqData);
+    setReqData({...reqData, userId: user.result._id})
+    dispatch(createRequest({ ...reqData, userId: user?.result?._id}, history));
+    //console.log(reqData);
   };
   const handleOpen = () => {
     setOpen(true);
@@ -158,15 +158,16 @@ const RequestForm = (props) => {
           <Button>Clear</Button>
         </form>
       </Paper>
-      <ImageModal
+
+      {/* ---------- Image Modal Needs Work ------------- */}
+      {/* <ImageModal
         open={open}
         handleClose={handleClose}
         imgs={reqData.imageFiles}
-      />
+      /> */}
     </Container>
   );
 };
 
 export default RequestForm;
-// for ln 117 => onDone={({ base64 }) => setImgFiles(base64)}
-// selectedFile: [...reqData.selectedFile, base64]  => for line 115
+

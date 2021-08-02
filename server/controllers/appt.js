@@ -5,8 +5,7 @@ import Appt from '../models/appt.js'
 
 export const newAppt = async (req, res) => {
     const appt = req.body
-    console.log(appt);
-    const newAppt = new Appt({ ...appt, createdAt: new Date().toISOString() })
+    const newAppt = new Appt({ ...appt, createdAt: new Date().toISOString()})
     try {
         await newAppt.save()
         res.status(201).json(newAppt)

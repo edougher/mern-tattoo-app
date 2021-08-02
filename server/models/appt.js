@@ -7,11 +7,11 @@ const apptSchema = mongoose.Schema({
   width: Number,
   colors: Number,
   comments: String,
-  selectedFile: String,
+  imageFiles: [{ type: String }],
   status: {type: String, default: "Pending"},
   createdAt: {
     type: Date,
-    defualt: new Date(),
+    default: new Date(),
   },
 });
 

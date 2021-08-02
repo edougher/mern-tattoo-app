@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Backdrop, Fade } from "@material-ui/core";
+import { Modal, Backdrop, Fade, Card, CardMedia } from "@material-ui/core";
 import { useStyles } from "./styles";
 
 const ImageModal = ({ open, handleClose, imgs }) => {
@@ -10,7 +10,6 @@ const ImageModal = ({ open, handleClose, imgs }) => {
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        className={classes.modal}
         open={open}
         onClose={handleClose}
         closeAfterTransition
@@ -20,9 +19,15 @@ const ImageModal = ({ open, handleClose, imgs }) => {
         }}
       >
         <Fade in={open}>
-          <div className={classes.paper}>
+          <div >
             {imgs.map((img) => (
-              <img src={img} alt="Uploaded Reference File" />
+              <Card className={{maxWidth: 375}}>
+                <CardMedia
+                  className={classes.img}
+                  image={img}
+                  title="uploaded img file"
+                />
+              </Card>
             ))}
           </div>
         </Fade>
