@@ -27,7 +27,6 @@ let reqFormData = {
 const RequestForm = (props) => {
   const [reqData, setReqData] = useState(reqFormData);
   const [open, setOpen] = useState(false);
-  const [images, setImages] = useState([]);
   const history = useHistory();
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
@@ -40,6 +39,7 @@ const RequestForm = (props) => {
   };
   const handleOpen = () => {
     setOpen(true);
+    console.log(open);
   };
   const handleClose = () => {
     setOpen(false);
@@ -160,11 +160,11 @@ const RequestForm = (props) => {
       </Paper>
 
       {/* ---------- Image Modal Needs Work ------------- */}
-      {/* <ImageModal
+      <ImageModal
         open={open}
         handleClose={handleClose}
         imgs={reqData.imageFiles}
-      /> */}
+      />
     </Container>
   );
 };
