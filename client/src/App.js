@@ -9,6 +9,7 @@ import Auth from "./components/Auth/Auth";
 import RequestForm from "./components/RequestForm/RequestForm";
 import Profile from "./components/Profile/Profile";
 import { getUserAppts } from "./actions/appts";
+import { isAdmin } from "./actions/auth";
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem('profile'))
@@ -16,7 +17,11 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getUserAppts(user?.result?._id))
+    dispatch(isAdmin())
+    //console.log(user?.result.email);
   }, [dispatch])
+
+
   return (
     <BrowserRouter>
       <Container maxwidth="lg">

@@ -6,7 +6,7 @@ const ImageModal = ({ open, imgs, handleClose }) => {
 
   return (
     <Modal isOpen={open} onClick={handleClose}>
-      <button>Close</button>
+      <button onClick={handleClose}>Close</button>
       {imgs.map((img) => {
         return (
           <img src={img} alt="reference material" height="500" width="400" style={{ "vertical-align":"middle"}}/>

@@ -17,12 +17,23 @@ export const newAppt = async (req, res) => {
 export const userAppts = async (req, res) => {
     const { id } = req.params
     console.log(id)
-    const appts = Appt.find({ userId: id }, (error, data) => {
-        if (error) {
-            console.log(error);
-        } else {
-            res.status(201).json(data)
-        }
-    })
+    if (id === "610d95968d9e53b70d5c055b") {
+        const allRequest = await Appt.find((error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                res.status(201).json(data)
+            }
+        })
+    } else {
+        const appts = await Appt.find({ userId: id }, (error, data) => {
+            if (error) {
+                console.log(error);
+            } else {
+                res.status(201).json(data)
+            }
+        })
+    }
+    
 }
 
