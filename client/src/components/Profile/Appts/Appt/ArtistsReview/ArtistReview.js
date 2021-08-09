@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { createReview } from "../../../../../actions/appts";
 import {
   Container,
   Paper,
@@ -37,6 +38,7 @@ const ArtistReview = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(createReview(review, history))
     console.log(review);
   };
   return (
