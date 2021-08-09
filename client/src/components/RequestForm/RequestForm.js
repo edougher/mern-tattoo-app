@@ -21,7 +21,7 @@ let reqFormData = {
   height: 0,
   colors: 0,
   comments: "hello world",
-  imageFiles: [],
+  imageFiles: []
 };
 
 const RequestForm = (props) => {

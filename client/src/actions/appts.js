@@ -18,3 +18,18 @@ export const deleteAppt = (userId) => async (dispatch) => {
     }
 }
 
+export const setCurrentAppt = (appt) => {
+    return {
+        type: "SET_CURRENT_APPT",
+        payload: appt
+    }
+}
+
+export const createReview = (review) = async (dispatch) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+

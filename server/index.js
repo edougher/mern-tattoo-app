@@ -17,6 +17,7 @@ app.use(cors());
 
 app.use('/appts', apptRouter)
 app.use('/user', userRouter);
+app.use('/review', reviewRouter)
 app.use('/', userRouter)
 
 

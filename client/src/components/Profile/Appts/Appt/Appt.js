@@ -1,13 +1,8 @@
 import React, { useState } from "react";
-import {useSelector} from 'react-redux'
-import {
-  Card,
-  CardActions,
-  CardMedia,
-  CardContent,
-  Button,
-  Typography,
-} from "@material-ui/core";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentAppt } from "../../../../actions/appts";
+import { Link, useHistory, useLocation } from "react-router-dom";
+import { Card, CardMedia, Button, Typography } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import ImageModal from "../../../RequestForm/ImgModal/ImgModal";
@@ -17,9 +12,9 @@ import useStyles from "./styles";
 
 const Appt = ({ appt, setCurrentId }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const isAdmin = useSelector((state) => state.auth.admin)
-  //const dispatch = useDispatch();
+  const isAdmin = useSelector((state) => state.auth.admin);
 
   const viewImages = (imgs) => {
     setOpen(true);
@@ -27,6 +22,11 @@ const Appt = ({ appt, setCurrentId }) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const currentAppt = (appt) => {
+    //console.log("helllo dispatch", appt);
+    dispatch(setCurrentAppt(appt));
   };
 
   return (
@@ -72,15 +72,15 @@ const Appt = ({ appt, setCurrentId }) => {
       >
         View Images
       </Button>
-      {
+      {isAdmin && (
         <Button
           variant="contained"
-          color="primary"
-          onClick={() => viewImages(appt.imageFiles)}
+          color="secondary"
+          onClick={() => currentAppt(appt)}
         >
-          Review
+          <Link to="/artistreview">Review</Link>
         </Button>
-      }
+      )}
       <ImageModal
         open={open}
         handleClose={handleClose}
