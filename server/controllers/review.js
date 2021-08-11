@@ -1,19 +1,42 @@
-import express from 'express';
-import mongoose from 'mongoose';
+import express from "express";
+import mongoose from "mongoose";
 
-import Review from '../models/review.js'
+import Review from "../models/review.js";
+import Appt from "../models/appt.js";
 
 export const createReview = async (req, res) => {
-    const review = req.body
-    // check if 'review.approved === true, if so change Review.status to Approved
-    // this part might change in the future to have mutiple status' rather than just "Approved" and "Pending"
-    // also update original Appt.status
-    const newReview = new Review({ ...review, createdAt: new Date().toISOString()})
+  const review = req.body;
+  // TODO
+  // check if 'review.approved === true, if so change Review.status to Approved
+  // this part might change in the future to have mutiple status' rather than just "Approved" and "Pending"
+  // also update original Appt.status
 
-    try {
-        await newReview.save()
-        res.status(201).json(newReview)
+  if (review.approved === true) {
+    const filter = { _id: review.apptId };
+    const update = { status: "Approved" };
+    const newAppt = { new: true };
+    const newReview = new Review({
+      ...review, status: "Approved",
+      createdAt: new Date().toISOString(),
+    });
+      try {
+          const appt = await Appt.findOneAndUpdate(filter, update, newAppt);
+          const resObject = { newReview, appt}
+      await newReview.save();
+      res.status(201).json(resObject);
     } catch (error) {
-        res.status(409).json({ message: error.message });
+      console.log(error);
     }
-}
+  } else {
+    const newReview = new Review({
+      ...review,
+      createdAt: new Date().toISOString(),
+    });
+    try {
+      res.status(201).json(newReview);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+};

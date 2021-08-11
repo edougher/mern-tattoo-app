@@ -24,9 +24,9 @@ export const setCurrentAppt = (appt) => {
 
 export const createReview = (review) => async (dispatch) => {
   try {
-      const { data } = await api.createReview(review);
-      console.log(data);
-    //dispatch()
+    const { data } = await api.createReview(review);
+    console.log(data);
+    dispatch({ type: "CREATE_REVIEW", payload: data });
   } catch (error) {
     console.log(error);
   }
