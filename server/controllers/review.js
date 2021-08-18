@@ -40,3 +40,13 @@ export const createReview = async (req, res) => {
   }
 
 };
+
+export const getReviews = async (req, res) => {
+  const { id } = req.params
+  console.log(id, "review controller");
+  try {
+    
+  } catch (error) {
+    
+  }
+}

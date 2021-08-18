@@ -72,7 +72,7 @@ const Appt = ({ appt, setCurrentId }) => {
       >
         View Images
       </Button>
-      {appt.status === "Approved" && <h1> hello</h1>}
+      {appt.status === "Approved" && <Button color="secondary" variant="contained">View Artist Review</Button>}
       {isAdmin && (
         <Button
           variant="contained"

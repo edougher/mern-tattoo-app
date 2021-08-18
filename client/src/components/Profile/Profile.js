@@ -15,7 +15,7 @@ const Profile = () => {
     // user?.result?.id ? 
     //   dispatch(getUserAppts(user?.result?.id)) :
     //   dispatch(getUserAppts(user?.result?.googleId)) 
-      console.log(user);
+     
   },[]);
 
   return (

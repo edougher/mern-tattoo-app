@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 const reviewSchema = mongoose.Schema({
-    apptId: String,
+  apptId: String,
+  userId: String,
     cost: Number,
     time: Number,
     comments: String,

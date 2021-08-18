@@ -10,6 +10,7 @@ import ArtistReview from "./components/Profile/Appts/Appt/ArtistsReview/ArtistRe
 import RequestForm from "./components/RequestForm/RequestForm";
 import Profile from "./components/Profile/Profile";
 import { getUserAppts } from "./actions/appts";
+import { getReviews } from "./actions/reviews";
 import { isAdmin } from "./actions/auth";
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getUserAppts(user?.result?._id))
+    dispatch(getReviews(user?.result?._id))
     dispatch(isAdmin())
     //console.log(user?.result.email);
   }, [dispatch])

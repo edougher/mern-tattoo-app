@@ -3,7 +3,7 @@ export default (apptReview = {current: null, alreadyReviewed: null}, action) => 
   switch (action.type) {
     case "CREATE_REVIEW":
       debugger
-      return {...apptReview, alreadyReviewed: [...action.payload]}
+      return {...apptReview, ...action.payload}
         case "SET_CURRENT_APPT":
             return { ...apptReview, ...action.payload }
       default:

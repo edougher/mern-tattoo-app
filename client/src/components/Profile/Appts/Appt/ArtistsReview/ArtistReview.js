@@ -18,6 +18,7 @@ import {
 const artistReview = {
   apptId: "",
   cost: 0,
+  userId: "",
   time: 0,
   comments: "",
   approved: false,
@@ -29,7 +30,7 @@ const ArtistReview = () => {
   const appt = useSelector((state) => state.reviewAppt);
 
   useEffect(() => {
-    setReview({ ...review, apptId: appt._id });
+    setReview({ ...review, userId: appt.userId, apptId: appt._id });
   }, []);
 
   const handleSwitchChange = () => {
