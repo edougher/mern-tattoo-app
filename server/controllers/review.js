@@ -45,6 +45,13 @@ export const getReviews = async (req, res) => {
   const { id } = req.params
   console.log(id, "review controller");
   try {
+    const appts = await Review.find({ userId: id }, (error, data) => {
+      if (error) {
+          console.log(error);
+      } else {
+          res.status(201).json(data)
+      }
+  })
     
   } catch (error) {
     
