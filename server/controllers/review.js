@@ -53,6 +53,6 @@ export const getReviews = async (req, res) => {
   })
     
   } catch (error) {
-    
+    console.error(error);
   }
 }
