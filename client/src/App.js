@@ -21,7 +21,6 @@ const App = () => {
     dispatch(getUserAppts(user?.result?._id))
     dispatch(getReviews(user?.result?._id))
     dispatch(isAdmin())
-    //console.log(user?.result.email);
   }, [dispatch])
 
 
