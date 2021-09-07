@@ -29,6 +29,10 @@ const Appt = ({ appt, setCurrentId }) => {
     dispatch(setCurrentAppt(appt));
   };
 
+  const openReview = () => {
+    
+  }
+
   return (
     <Card className={classes.card}>
       <CardMedia />
@@ -72,7 +76,7 @@ const Appt = ({ appt, setCurrentId }) => {
       >
         View Images
       </Button>
-      {appt.status === "Approved" && <Button color="secondary" variant="contained">View Artist Review</Button>}
+      {appt.status === "Approved" && <Button color="secondary" variant="contained" onClick={() => openReview}>View Artist Review</Button>}
       {isAdmin && (
         <Button
           variant="contained"
