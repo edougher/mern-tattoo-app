@@ -3,7 +3,7 @@ const reviews = (reviews = [], action) => {
   switch (action.type) {
     case "FETCH_USER_REVIEWS":
       //console.log(action.reviews);
-      return { ...reviews, ...action.reviews }
+      return [ ...reviews, ...action.reviews ]
       
     default:
       return reviews;

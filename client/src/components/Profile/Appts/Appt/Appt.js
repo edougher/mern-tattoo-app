@@ -9,30 +9,35 @@ import ImageModal from "../../../RequestForm/ImgModal/ImgModal";
 
 import moment from "moment";
 import useStyles from "./styles";
+import ViewReview from "./ViewReview/ViewReview";
 
 const Appt = ({ appt, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const [reviewOpen, setReviewOpen] = useState(false);
   const isAdmin = useSelector((state) => state.auth.admin);
+  const currentReview = useSelector((state) =>
+    state.reviews.find((rev) => rev.apptId === appt._id)
+  );
 
   const viewImages = (imgs) => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    setReviewOpen(false)
     setOpen(false);
   };
 
   const currentAppt = (appt) => {
-    //console.log("helllo dispatch", appt);
     dispatch(setCurrentAppt(appt));
   };
 
   const openReview = () => {
-    
-  }
-
+    setReviewOpen(true);
+  };
+  // TODO: handle delete appt
   return (
     <Card className={classes.card}>
       <CardMedia />
@@ -76,7 +81,15 @@ const Appt = ({ appt, setCurrentId }) => {
       >
         View Images
       </Button>
-      {appt.status === "Approved" && <Button color="secondary" variant="contained" onClick={() => openReview}>View Artist Review</Button>}
+      {appt.status === "Approved" && (
+        <Button
+          color="secondary"
+          variant="contained"
+          onClick={() => openReview()}
+        >
+          View Artist Review
+        </Button>
+      )}
       {isAdmin && (
         <Button
           variant="contained"
@@ -90,6 +103,12 @@ const Appt = ({ appt, setCurrentId }) => {
         open={open}
         handleClose={handleClose}
         imgs={appt.imageFiles}
+      />
+      <ViewReview
+        reviewOpen={reviewOpen}
+        openReview={openReview}
+        currentReview={currentReview}
+        handleClose={handleClose}
       />
     </Card>
   );
