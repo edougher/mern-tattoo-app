@@ -2,20 +2,30 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentAppt } from "../../../../actions/appts";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { Card, CardMedia, Button, Typography } from "@material-ui/core";
+import {
+  Card,
+  CardMedia,
+  Button,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordianDetails,
+  AccordionDetails,
+} from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import ImageModal from "../../../RequestForm/ImgModal/ImgModal";
 
 import moment from "moment";
 import useStyles from "./styles";
-import ViewReview from "./ViewReview/ViewReview";
 
 const Appt = ({ appt, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const [reviewOpen, setReviewOpen] = useState(false);
   const isAdmin = useSelector((state) => state.auth.admin);
   const currentReview = useSelector((state) =>
     state.reviews.find((rev) => rev.apptId === appt._id)
@@ -26,7 +36,6 @@ const Appt = ({ appt, setCurrentId }) => {
   };
 
   const handleClose = () => {
-    setReviewOpen(false)
     setOpen(false);
   };
 
@@ -34,9 +43,7 @@ const Appt = ({ appt, setCurrentId }) => {
     dispatch(setCurrentAppt(appt));
   };
 
-  const openReview = () => {
-    setReviewOpen(true);
-  };
+  const openReview = () => {};
   // TODO: handle delete appt
   return (
     <Card className={classes.card}>
@@ -73,6 +80,7 @@ const Appt = ({ appt, setCurrentId }) => {
       </Typography>
       <Typography className={classes.title} variant="h5" gutterBottom>
         {appt.status}
+        {appt.status === "Approved" ? <CheckCircleIcon style={{ color: "green"}} /> : <HourglassEmptyIcon />}
       </Typography>
       <Button
         variant="contained"
@@ -82,13 +90,27 @@ const Appt = ({ appt, setCurrentId }) => {
         View Images
       </Button>
       {appt.status === "Approved" && (
-        <Button
-          color="secondary"
-          variant="contained"
-          onClick={() => openReview()}
-        >
-          View Artist Review
-        </Button>
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>View Artist Review</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography>Review at: {currentReview.createdAt}</Typography>
+          </AccordionDetails>
+          <AccordionDetails>
+            <Typography>Cost: {currentReview.cost}</Typography>
+          </AccordionDetails>
+          <AccordionDetails>
+            <Typography>Time: {currentReview.time}</Typography>
+          </AccordionDetails>
+          <AccordionDetails>
+            <Typography>Comments: {currentReview.comments}</Typography>
+          </AccordionDetails>
+          <AccordionDetails>
+            <Typography>Comments: {currentReview.comments}</Typography>
+          </AccordionDetails>
+        </Accordion>
+        
       )}
       {isAdmin && (
         <Button
@@ -103,12 +125,6 @@ const Appt = ({ appt, setCurrentId }) => {
         open={open}
         handleClose={handleClose}
         imgs={appt.imageFiles}
-      />
-      <ViewReview
-        reviewOpen={reviewOpen}
-        openReview={openReview}
-        currentReview={currentReview}
-        handleClose={handleClose}
       />
     </Card>
   );
